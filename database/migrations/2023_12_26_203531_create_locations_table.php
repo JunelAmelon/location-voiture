@@ -13,9 +13,14 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_voiture');
-            $table->bigInteger('id_individu');
+            $table->bigInteger('id_voiture')->unsigned(); // Ajout de unsigned pour les clés étrangères
+            $table->bigInteger('id_individu')->unsigned(); // Ajout de unsigned pour les clés étrangères
             $table->timestamps();
+
+            // Définition des clés étrangères
+            $table->foreign('id_voiture')->references('id')->on('voitures');
+            $table->foreign('id_individu')->references('id')->on('individuses');
+
         });
     }
 
